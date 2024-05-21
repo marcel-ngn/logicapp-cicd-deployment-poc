@@ -6,7 +6,7 @@
       "value": "az-httplogicapp-prod"
     },
     "LogicAppLocation": {
-      "value": "australiaeast"
+      "value": "westeurope"
     }
   }
 }
