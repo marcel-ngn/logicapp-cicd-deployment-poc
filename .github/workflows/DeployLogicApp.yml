@@ -5,7 +5,6 @@ name: Deploy Logic App
 on:
 workflow_dispatch:
 
-
 jobs:
   validate-and-deploy:
    runs-on: ubuntu-latest
