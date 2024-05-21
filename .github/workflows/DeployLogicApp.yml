@@ -3,9 +3,8 @@ name: Deploy Logic App
 
 
 on:
- push:
-   branches:
-     - master
+workflow_dispatch:
+
 
 jobs:
   validate-and-deploy:
