@@ -6,8 +6,7 @@
         "type": "string",
         "minLength": 1,
         "allowedValues": [
-          "australiaeast",
-          "australiasoutheast"
+          "westeurope"
         ]
         
       },
@@ -92,3 +91,5 @@
      }
     }
   }
+
+  
