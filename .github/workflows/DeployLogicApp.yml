@@ -4,17 +4,19 @@ name: Create a Logic App
 
 # Controls when the action will run. 
 on:
- workflow_dispatch:
-    inputs:
-      subscriptionId:
-        description: 'SubscriptionId'
-        required: true
-      resourceGroupName:
-        description: 'Resource group name'
-        required: true
+  on:
+    push:
+      branches:
+        - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
+ jobs:
+    validate-and-deploy:
+     runs-on: ubuntu-latest
+     env:
+       ENV_RESOURCEGROUP: RSG-DEV
+       ENV_RESOURCEGROUPLOCATION: westeurope
+  
   # This workflow contains a single job called "build"
   build-and-deploy:
     # The type of runner that the job will run on
@@ -22,14 +24,31 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - uses: azure/arm-deploy@v1
-        with:
-          subscriptionId: ${{github.event.inputs.subscriptionId}}
-          resourceGroupName: ${{github.event.inputs.resourceGroupName}}
-          template: ./ARMTemplates/LA_Standard_Basic.json
-          parameters: ./ARMTemplates/LA_Standard_Basic_Param.json
+    #Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@master
+
+    #Use the azure provided action to log on to azure using service pricipal
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+    
+    # Create the resource group
+    - name: Create Resource Group
+      run: az group create -n ${{env.ENV_RESOURCEGROUP}} -l ${{env.ENV_RESOURCEGROUPLOCATION}}
+
+    #Validate the  ARM template
+    - name: Validate ARM template
+      run: |
+        az deployment group validate -g ${{env.ENV_RESOURCEGROUP}} --mode Incremental --template-file ./ARMTemplates/azure-logicapp-demo.deploy.json --parameters ./ARMTemplates/azure-logicapp-demo.deploy.parameters.json
+    
+    #Deploy the ARM Template
+    - name: Deploy Logic App
+      run: |
+       echo "::set-env name=logicappurl::$(az deployment group create -g az-logicapp-githubactions-demo-rg --template-file ./ARMTemplates/azure-logicapp-demo.deploy.json --parameters ./ARMTemplates/azure-logicapp-demo.deploy.parameters.json --query 'properties.outputs.logicAppUrl.value' -o tsv)"
+      shell: bash   
+      
+    # Log Out From Azure 
+    - name: Logout
+      run: az logout
