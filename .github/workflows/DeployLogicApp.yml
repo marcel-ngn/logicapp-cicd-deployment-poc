@@ -1,4 +1,4 @@
-name: Create a Logic App
+name: Deploy Logic App
 
 
 on:
@@ -12,12 +12,6 @@ on:
      env:
        ENV_RESOURCEGROUP: RSG-DEV
        ENV_RESOURCEGROUPLOCATION: westeurope
-  
-
-  build-and-deploy:
-
-    runs-on: windows-latest
-
 
     steps:
 
