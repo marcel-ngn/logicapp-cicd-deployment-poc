@@ -11,7 +11,7 @@ jobs:
   validate-and-deploy:
    runs-on: ubuntu-latest
    env:
-     ENV_RESOURCEGROUP: RSG-DEV
+     ENV_RESOURCEGROUP: RSG-DEV-02
      ENV_RESOURCEGROUPLOCATION: westeurope
 
    steps:
