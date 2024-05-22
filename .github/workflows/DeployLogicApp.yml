@@ -2,10 +2,7 @@
 name: Deploy Logic App
 
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   validate-and-deploy:
