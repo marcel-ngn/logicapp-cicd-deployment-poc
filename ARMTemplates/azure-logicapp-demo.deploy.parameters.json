@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "LogicAppName": {
-      "value": "az-httplogicapp-prod"
+      "value": "mn-testing-220524"
     },
     "LogicAppLocation": {
       "value": "westeurope"
