@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "LogicAppName": {
-      "value": "mn-testing-220524"
+      "value": "MN-LA-22052024-01"
     },
     "LogicAppLocation": {
       "value": "westeurope"

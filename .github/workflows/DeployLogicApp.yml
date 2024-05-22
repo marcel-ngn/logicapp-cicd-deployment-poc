@@ -28,8 +28,12 @@ jobs:
         az deployment group validate -g ${{env.ENV_RESOURCEGROUP}} --mode Incremental --template-file ./ARMTemplates/azure-logicapp-demo.deploy.json --parameters ./ARMTemplates/azure-logicapp-demo.deploy.parameters.json
     
 
-    - name: Deploy Logic App
-      run: az deployment group create -g RSG-DEV --template-file ./ARMTemplates/azure-logicapp-demo.deploy.json --parameters ./ARMTemplates/azure-logicapp-demo.deploy.parameters.json
+    - name: Deploy Logic App 1
+      run: az deployment group create -g RSG-DEV --template-file ./ARMTemplates/logic-app-1.deploy.json --parameters ./ARMTemplates/logic-app-1.deploy.parameters.json
+      shell: bash
+
+    - name: Deploy Logic App 2
+      run: az deployment group create -g RSG-DEV --template-file ./ARMTemplates/logic-app-2.deploy.json --parameters ./ARMTemplates/logic-app-2.deploy.parameters.json
       shell: bash
       
     - name: Logout
