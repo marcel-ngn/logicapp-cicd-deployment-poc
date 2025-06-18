@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workbookDisplayName": {
+      "value": "Persistence-Detection"
+    },
+    "workbookType": {
+      "value": "workbook"
+    },
+    "workbookSourceId": {
+      "value": "azure monitor"
+    },
+    "workbookId": {
+      "value": "[newGuid()]"
+    },
+    "logAnalyticsWorkspaceId": {
+      "value": "/subscriptions/YOUR-SUBSCRIPTION-ID/resourceGroups/YOUR-RESOURCE-GROUP/providers/Microsoft.OperationalInsights/workspaces/YOUR-WORKSPACE-NAME"
+    }
+  }
+}
